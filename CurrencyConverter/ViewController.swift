@@ -21,6 +21,9 @@ class ViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getRates()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tintColor = .white
         
         if(pickerView == nil){
             print("Error!")
@@ -53,8 +56,6 @@ class ViewController: UIViewController{
                         DispatchQueue.main.async {
                             let rates = jsonResult["data"] as! Dictionary<String, Double>
                             self.addItem(dict: rates)
-                            
-                            
                         }
                         
                     }
@@ -80,6 +81,7 @@ class ViewController: UIViewController{
             self.pickerData.append(currency)
         }
         self.pickerView.reloadAllComponents()
+        self.tableView.reloadData()
         }
     
     
@@ -87,6 +89,29 @@ class ViewController: UIViewController{
 }
 
 
+extension ViewController: UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.pickerData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        var content = cell.defaultContentConfiguration()
+        if let name = self.pickerData[indexPath.row].name{
+            if let rate = self.pickerData[indexPath.row].value{
+                content.text = "     \(name) : \(rate)"
+            }
+        }
+        else{
+            content.text = "NAN"
+        }
+        cell.contentConfiguration = content
+        return cell
+        
+    }
+    
+    
+}
 
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate{
    
