@@ -14,6 +14,7 @@
 		B22690F82979D92E000B3C24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B22690F72979D92E000B3C24 /* Assets.xcassets */; };
 		B22690FB2979D92E000B3C24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22690F92979D92E000B3C24 /* LaunchScreen.storyboard */; };
 		B22691032979EA21000B3C24 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22691022979EA21000B3C24 /* Currency.swift */; };
+		B2EBF7AC297C37A60057CD76 /* RatesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EBF7AB297C37A60057CD76 /* RatesVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		B22690FA2979D92E000B3C24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B22690FC2979D92E000B3C24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22691022979EA21000B3C24 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		B2EBF7AB297C37A60057CD76 /* RatesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				B22690EE2979D92C000B3C24 /* AppDelegate.swift */,
 				B22690F02979D92C000B3C24 /* SceneDelegate.swift */,
 				B22690F22979D92C000B3C24 /* ViewController.swift */,
+				B2EBF7AB297C37A60057CD76 /* RatesVC.swift */,
 				B22690F42979D92C000B3C24 /* Main.storyboard */,
 				B22690F72979D92E000B3C24 /* Assets.xcassets */,
 				B22690F92979D92E000B3C24 /* LaunchScreen.storyboard */,
@@ -145,6 +148,7 @@
 				B22690F32979D92C000B3C24 /* ViewController.swift in Sources */,
 				B22690EF2979D92C000B3C24 /* AppDelegate.swift in Sources */,
 				B22690F12979D92C000B3C24 /* SceneDelegate.swift in Sources */,
+				B2EBF7AC297C37A60057CD76 /* RatesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

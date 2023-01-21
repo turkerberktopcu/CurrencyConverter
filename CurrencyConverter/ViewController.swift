@@ -13,17 +13,18 @@ class ViewController: UIViewController{
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var pickerData = [Currency]()
     
-    @IBOutlet weak var chooseCurrency: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    var defaultCurrency: Int? = nil
+    var selectedCurrency: Currency?
+    var pickerData = [Currency]()
+    var originalExchangeRates = [Currency]()
+    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getRates()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.tintColor = .white
+        
         
         if(pickerView == nil){
             print("Error!")
@@ -31,8 +32,7 @@ class ViewController: UIViewController{
         else{
             pickerView.delegate = self
             pickerView.dataSource = self
-            let selectedRow = pickerView.selectedRow(inComponent: 0)
-            let view = pickerView.delegate?.pickerView?(pickerView, titleForRow: selectedRow, forComponent: 0) as? UILabel
+                    
         }
 
     }
@@ -78,40 +78,43 @@ class ViewController: UIViewController{
         for key in keys {
             let rate = dict[key]
             let currency = Currency(name: key, value: rate!)
+            if currency.name == "USD"{
+                self.defaultCurrency = self.pickerData.count
+            }
             self.pickerData.append(currency)
         }
+        self.originalExchangeRates = self.pickerData
         self.pickerView.reloadAllComponents()
-        self.tableView.reloadData()
+
+        if let defaultCurrency = self.defaultCurrency {
+            self.pickerView.selectRow(defaultCurrency, inComponent: 0, animated: true)
+        
         }
-    
-    
-    
-}
-
-
-extension ViewController: UITableViewDelegate,UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.pickerData.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        var content = cell.defaultContentConfiguration()
-        if let name = self.pickerData[indexPath.row].name{
-            if let rate = self.pickerData[indexPath.row].value{
-                content.text = "     \(name) : \(rate)"
+    
+    @IBAction func seeRatesClicked(_ sender: Any) {
+        performSegue(withIdentifier: "toRatesVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRatesVC" {
+            let destination = segue.destination as! RatesVC
+            destination.pickerData = self.originalExchangeRates
+            let selectedRow = self.pickerView.selectedRow(inComponent: 0)
+            destination.baseCurrency = self.pickerData[selectedRow]
+            if let val = self.pickerData[selectedRow].value {
+                print(val)
             }
         }
-        else{
-            content.text = "NAN"
-        }
-        cell.contentConfiguration = content
-        return cell
-        
     }
     
     
+    
 }
+
+
+
 
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate{
    
